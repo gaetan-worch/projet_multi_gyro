@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<script src=" https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js "></script>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Gyroscope n°Prototype</title>
+    </head>
+
+    <body>
+<div>
+  <canvas id="myChart"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+            pointRadius : 0
+        },
+        {
+            label: 'test',
+            data: [5, 0, 3, 1, 8, 3],
+            borderWidth: 1,
+            pointRadius : 0
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
+    </script>
+    <div>
+        <canvas id="b"></canvas>
+          </div>
+      
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+          <script src="Graphique.js"></script>
+          
+        <input type="button" value="Télécharger" onclick="window.location='test.csv'">
+        <a href="\A"><button>Led 1 on</button></a>
+        <a href="\a"><button>Led 1 off</button></a>
+    </body>
+</html>
