@@ -21,7 +21,7 @@ i2c = SMBus(DEVICE_BUS)
 led = LED(GPIO_LED)
 button = Button(GPIO_BUTTON, bounce_time=1)
 motor_start = DigitalOutputDevice(GPIO_MOTOR_START, active_high=True, initial_value=False)
-motor_ready = DigitalInputDevice(GPIO_MOTOR_READY, pull_up=True)
+motor_ready = DigitalInputDevice(GPIO_MOTOR_READY)
 
 state = "WAIT_START_SIGNAL"
 
