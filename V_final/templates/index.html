@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Graph</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div id="graph" class="grid-item"></div>
+    <div id="graph2" class="grid-item"></div>
+   <script>
+       $(document).ready(function() {
+            updateGraph();
+            updateGraph2();
+
+            function updateGraph() {
+                $.getJSON('/data', function(data) {
+                        var x = data.labels;
+                        var y = data.values;
+
+                        var trace = {
+                            x: x,
+                            y: y,
+                            type: 'line'
+                        };
+                        var trace1 = {
+                            x: x,
+                            y: y, 
+                            type: 'line'
+                        }
+                        var layout = {
+                            title: 'Cardan intérieur',
+                            xaxis: { title: 'Temps [ms]' },
+                            yaxis: { title: 'Angle [°]' }
+                        };
+
+                        var graphData = [trace];
+
+                        Plotly.newPlot('graph', graphData, layout);
+                });
+            }
+
+            function updateGraph2() {
+                $.ajax({
+                    url: '/data',
+                    dataType: 'json',
+                    success: function(data) {
+                        var labels = data.labels;
+                        var values2 = data.values2;
+
+                        var trace2 = {
+                            x: labels,
+                            y: values2,
+                            type: 'line',
+                            name: 'Colonne supplémentaire'
+                        };
+
+                        var data2 = [trace2];
+
+                        var layout2 = {
+                            title: 'Cardan exterieur',
+                            xaxis: {
+                                title: 'Temps [ms]'
+                            },
+                            yaxis: {
+                                title: 'Angle [°]'
+                            }
+                        };
+
+                        Plotly.newPlot('graph2', data2, layout2);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Erreur lors de la récupération des données : ' + error);
+                    }
+                });
+            }
+            
+            setInterval(updateGraph, updateGraph2, 1000);
+        });
+   </script>
+
+<a href="\demmarreMesure"><button id="demarrerMesure">Démarrer Mesure</button></a>
+<a href="\stopMesure"><button id="stopMesure">Stop Mesure</button></a>
+<a href="\telecharger"><button id="telecharger">Télécharger</button></a>
+</body>
+</html>
