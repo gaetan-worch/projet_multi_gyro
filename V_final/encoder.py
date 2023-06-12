@@ -31,7 +31,6 @@ motor_ready = DigitalInputDevice(GPIO_MOTOR_READY)
 state = "WAIT_START_SIGNAL"
 
 csv_file = 'measure.csv'
-data = pd.read_csv(csv_file)
 
 @app.route('/')
 def index() :
@@ -52,7 +51,7 @@ def arret() :
     led.off()
     print("Fin de mesure")
     i2c.write_byte_data(DEVICE_ADDR, 0x00, STOP_COUNTING)
-    sleep(1) # pourquoi nécessaire ?
+    sleep(1)
     state = "WAIT_START_SIGNAL"
     return render_template('index.html')
 
@@ -68,6 +67,7 @@ def get_data():
 @app.route("/telecharger")
 def download() :
     return send_file(csv_file)
+
 def test() :
     global state
     while True :
@@ -115,4 +115,4 @@ if __name__=="__main__":
     print("Start")
     mesure_thread = threading.Thread(target=test)
     mesure_thread.start()
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')

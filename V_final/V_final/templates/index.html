@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gyromoto</title>
+    <title>Graph</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -9,9 +9,10 @@
 
     <div id="graph"></div>
     <div id="graph2"></div>
-    <script>
-        $(document).ready(function() {
+   <script>
+       $(document).ready(function() {
             updateGraph();
+
             function updateGraph() {
                 $.getJSON('/data', function(data) {
                         var x = data.labels;
@@ -61,7 +62,7 @@
             
             setInterval(updateGraph, 1000);
         });
-    </script>
+   </script>
 
 <a href="\demmarreMesure"><button id="demarrerMesure">Démarrer Mesure</button></a>
 <a href="\stopMesure"><button id="stopMesure">Stop Mesure</button></a>
